@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using System.Collections.Generic;
 ﻿namespace C_Sharp_Challenge_Skeleton.Answers
@@ -12,7 +13,7 @@ using System.Collections.Generic;
               return -1;
             }
             List<int> visited = new List<int>();
-            return lengthPath(targetServer, connectionTimeMatrix, connectionTimeMatrix[targetServer, 0]);
+            return lengthPath(targetServer, connectionTimeMatrix, connectionTimeMatrix[targetServer, 0], visited);
         }
 
         public static int lengthPath(int startingNode, int[,] graph, int minValue, List<int> visited)
@@ -31,7 +32,7 @@ using System.Collections.Generic;
             }
           }
           foreach(int node in availableNodes) {
-            minValue = Math.min(minValue, graph[startingNode, node] + lengthPath(node, graph, minValue, visited));
+            minValue = Math.Min(minValue, graph[startingNode, node] + lengthPath(node, graph, minValue, visited));
           }
           return minValue;
         }
