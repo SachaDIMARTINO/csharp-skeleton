@@ -27,7 +27,7 @@ using System.Collections.Generic;
           visited.Add(startingNode);
           List<int> availableNodes = new List<int>();
           for(int i = 0; i < graph.GetLength(0); i++) {
-            if(!availableNodes.Contains(i) && graph[startingNode, i] <= minValue) {
+            if(!visited.Contains(i) && graph[startingNode, i] <= minValue) {
               availableNodes.Add(i);
             }
           }
