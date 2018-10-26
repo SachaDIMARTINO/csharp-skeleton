@@ -1,4 +1,5 @@
 using System.Linq;
+using System.Collections.Generic;
 ﻿namespace C_Sharp_Challenge_Skeleton.Answers
 
 {
@@ -10,11 +11,11 @@ using System.Linq;
             if(numOfServers == 0 || numOfServers > connectionTimeMatrix.GetLength(0)) {
               return -1;
             }
-            int[] visited = {};
+            List<int> visited = new List<int>();
             return lengthPath(targetServer, connectionTimeMatrix, connectionTimeMatrix[targetServer, 0]);
         }
 
-        public static int lengthPath(int startingNode, int[,] graph, int minValue, int[] visited)
+        public static int lengthPath(int startingNode, int[,] graph, int minValue, List<int> visited)
         {
           for(int i = 0; i < graph.GetLength(0); i++) {
             graph[i, i] = 1000000;
@@ -23,7 +24,7 @@ using System.Linq;
             return 0;
           }
           visited.Add(startingNode);
-          int[] availableNodes = {};
+          List<int> availableNodes = new List<int>();
           for(int i = 0; i < graph.GetLength(0); i++) {
             if(!availableNodes.Contains(i) && graph[startingNode, i] <= minValue) {
               availableNodes.Add(i);
