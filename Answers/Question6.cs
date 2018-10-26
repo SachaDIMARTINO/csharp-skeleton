@@ -9,7 +9,7 @@ using System.Linq;
             if(numOfServers == 0 || numOfServers > connectionTimeMatrix.rowLength) {
               return -1;
             }
-            int[] visited = [];
+            int[] visited = {};
             return lengthPath(targetServer, connectionTimeMatrix, connectionTimeMatrix[targetServer, 0]);
         }
 
@@ -22,7 +22,7 @@ using System.Linq;
             return 0;
           }
           visited.add(startingNode);
-          int[] availableNodes = [];
+          int[] availableNodes = {};
           for(int i = 0; i < graph.rowLength; i++) {
             if(!availableNodes.Contains(i) && graph[startingNode, i] <= minValue) {
               availableNodes.add(i);
