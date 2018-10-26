@@ -30,7 +30,7 @@ using System.Linq;
             }
           }
           foreach(int node in availableNodes) {
-            minValue = Math.min(minValue, graph[startingNode, node] + lengthPath(node, graph, minValue, visited)));
+            minValue = Math.min(minValue, graph[startingNode, node] + lengthPath(node, graph, minValue, visited));
           }
           return minValue;
         }
