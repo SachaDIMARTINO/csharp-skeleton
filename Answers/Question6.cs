@@ -7,7 +7,7 @@ using System.Linq;
         public static int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
             //TODO: Please work out the solution;
-            if(numOfServers == 0 || numOfServers > connectionTimeMatrix.getLength(0)) {
+            if(numOfServers == 0 || numOfServers > connectionTimeMatrix.GetLength(0)) {
               return -1;
             }
             int[] visited = {};
@@ -16,17 +16,17 @@ using System.Linq;
 
         public static int lengthPath(int startingNode, int[,] graph, int minValue, int[] visited)
         {
-          for(int i = 0; i < graph.getLength(0); i++) {
+          for(int i = 0; i < graph.GetLength(0); i++) {
             graph[i, i] = 1000000;
           }
           if(startingNode == 0) {
             return 0;
           }
-          visited.add(startingNode);
+          visited.Add(startingNode);
           int[] availableNodes = {};
-          for(int i = 0; i < graph.getLength(0); i++) {
+          for(int i = 0; i < graph.GetLength(0); i++) {
             if(!availableNodes.Contains(i) && graph[startingNode, i] <= minValue) {
-              availableNodes.add(i);
+              availableNodes.Add(i);
             }
           }
           foreach(int node in availableNodes) {
