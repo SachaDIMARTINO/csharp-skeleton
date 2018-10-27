@@ -11,14 +11,16 @@ using System.Collections.Generic;
             int answer = totalValueOfShares + 1;
             int[] setArr = numOfShares.Distinct().ToArray();
             Array.Sort(setArr);
+            if (setArr.Contains(0)) {
+              setArr = setArr.Skip(1).ToArray();
+            }
             Array.Reverse(setArr);
             for (int i = 0; i < setArr.Length; i++) {
               int j = i;
               int remaining = totalValueOfShares;
               int res = 0;
-              int n = 0;
               while (remaining > 0 && j < setArr.Length) {
-                n = remaining / setArr[j];
+                int n = remaining / setArr[j];
                 res = res + n;
                 remaining = remaining - n * setArr[j];
                 j++;
