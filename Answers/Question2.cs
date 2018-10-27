@@ -53,15 +53,18 @@ using System.Collections.Generic;
               sumPSMin = sumPSCashflowIn;
               sumPSMax = sumPSCashflowOut;
             }
-            while(true) {
+            int minSumPSCashflowIn = sumPSCashflowIn.Min();
+            int minSumPSCashflowOut = sumPSCashflowOut.Min();
+            int minMin = Math.Min(minSumPSCashflowIn, minSumPSCashflowOut);
+            while(i < minMin) {
               foreach(int sum in sumPSMin) {
                 if(sumPSMax.Contains(sum + i) || sumPSMax.Contains(sum - i)) {
-                  int x = Math.Min(i, sumPSCashflowIn.Min());
-                  return Math.Min(x, sumPSCashflowOut.Min());
+                  return Math.Min(i, minMin);
                 }
               }
               i++;
             }
+            return minMin;
         }
     }
 }
