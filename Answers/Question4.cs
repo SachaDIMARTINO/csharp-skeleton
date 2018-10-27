@@ -28,8 +28,7 @@ using System.Collections.Generic;
                 }
               }
               for(int start = 0; start < rowInt.Count - numOfConsecutiveMachines + 1; start++) {
-                int end = start + numOfConsecutiveMachines;
-                List<int> shortRow = rowInt.GetRange(start, end);
+                List<int> shortRow = rowInt.GetRange(start, numOfConsecutiveMachines);
                 answer = Math.Min(answer, shortRow.Sum());
               }
             }
