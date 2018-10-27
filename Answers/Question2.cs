@@ -59,8 +59,8 @@ using System.Collections.Generic;
                   int x = Math.Min(i, sumPSCashflowIn.Min());
                   return Math.Min(x, sumPSCashflowOut.Min());
                 }
-                i++;
               }
+              i++;
             }
         }
     }
