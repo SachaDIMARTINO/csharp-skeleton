@@ -11,7 +11,7 @@ using System.Collections.Generic;
             //TODO: Please work out the solution;
             int nRow = connectionTimeMatrix.GetLength(0);
             if(numOfServers == 0 || numOfServers > nRow) {
-              return -1;
+              return 0;
             }
             int infinity = 10000000;
             List<int> djikstra = new List<int>();

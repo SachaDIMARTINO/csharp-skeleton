@@ -88,3 +88,52 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         }
     }
 }
+
+public class Graph {
+        public int nbNodes {
+            get;
+            set;
+        }
+        public List<List<int>> edges {
+            get;
+        }
+        public Graph() {
+            this.nbNodes = 0;
+            this.edges = new List<List<int>>();
+        }
+        public Graph(int nbNodes, List<List<int>> edges) {
+            this.nbNodes = nbNodes;
+            this.edges = edges;
+        }
+
+        public List<int> GetNodes(int i) {
+            return this.edges[i];
+        }
+
+        public int GetEdge(int i, int j) {
+            return this.edges[i][j];
+        }
+        public void AddNode() {
+            List<int> tmp = new List<int>();
+            for (int i = 0 ; i < this.nbNodes ; i++) {
+                tmp.Add(-1);
+            }
+            this.nbNodes += 1;
+            this.edges.Add(tmp);
+            for (int k = 0 ; k < this.nbNodes ; k++) {
+                this.edges[k].Add(-1);
+            }
+        }
+
+        public void AddEdge(int i, int j, int value) {
+            if ((i > this.nbNodes && j > this.nbNodes) || i == j) {
+
+            } else {
+                if (i == this.nbNodes || j == this.nbNodes) {
+                    this.AddNode();
+                }
+                this.edges[i][j] = value;
+                this.edges[j][i] = value;
+              }
+        }
+}
