@@ -21,15 +21,17 @@ using System.Collections.Generic;
               return 0;
             }
             foreach(string[] row in newMachineToBeFixed) {
-              List<int> rowInt = new List<int>();
-              foreach(string elt in row) {
-                if(elt != "X") {
-                  rowInt.Add(int.Parse(elt));
+              for(int start = 0; start < row.Count() - numOfConsecutiveMachines; start++) {
+                string[] shortRow = new string[numOfConsecutiveMachines];
+                Array.Copy(row, start, shortRow, 0, numOfConsecutiveMachines);
+                //rowInt = row.GetRange(start, numOfConsecutiveMachines);
+                List<int> rowInt = new List<int>();
+                if (!shortRow.Contains("X")) {
+                  foreach(string elt in shortRow) {
+                    rowInt.Add(int.Parse(elt));
+                  }
+                  answer = Math.Min(answer, rowInt.Sum());
                 }
-              }
-              for(int start = 0; start < rowInt.Count - numOfConsecutiveMachines + 1; start++) {
-                List<int> shortRow = rowInt.GetRange(start, numOfConsecutiveMachines);
-                answer = Math.Min(answer, shortRow.Sum());
               }
             }
             if (answer == 1000000) {
