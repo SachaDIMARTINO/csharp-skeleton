@@ -16,8 +16,9 @@ using System.Collections.Generic;
               int j = i;
               int remaining = totalValueOfShares;
               int res = 0;
+              int n = 0;
               while (remaining > 0 && j < setArr.Length) {
-                int n = remaining / setArr[j];
+                n = remaining / setArr[j];
                 res = res + n;
                 remaining = remaining - n * setArr[j];
                 j++;
