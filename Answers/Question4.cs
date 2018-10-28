@@ -19,7 +19,7 @@ using System.Collections.Generic;
             for(int i = 0; i < nRows; i++) {
               int counter = 0;
               int sumTmp = 0;
-              for(int j = 0; j <= lenRow - numOfConsecutiveMachines; j++) {
+              for(int j = 0; j < lenRow; j++) {
                 if (machineToBeFixed[i,j] == "X") {
                   counter = 0;
                   sumTmp = 0;
@@ -36,6 +36,7 @@ using System.Collections.Generic;
                     counter -= 1;
                   }
                   if (counter == numOfConsecutiveMachines) {
+                    Console.WriteLine(sumTmp);
                     if (sumTmp < answer) {
                       answer = sumTmp;
                     }
