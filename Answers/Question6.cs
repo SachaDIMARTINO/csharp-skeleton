@@ -24,7 +24,11 @@ using System.Collections.Generic;
             visited.Add(0);
             for(int node = 0; node < nRow; node++) {
               if (!visited.Contains(node)) {
-                djikstra[node] = Math.Min(djikstra[node], djikstra[0] + connectionTimeMatrix[0, node]);
+                //djikstra[node] = Math.Min(djikstra[node], djikstra[0] + connectionTimeMatrix[0, node]);
+                int x = djikstra[0] + connectionTimeMatrix[0, node];
+                if(x < djikstra[node]) {
+                  djikstra[node] = x;
+                }
               }
             }
             List<int> newDjikstra = djikstra.GetRange(0, djikstra.Count);
@@ -33,7 +37,11 @@ using System.Collections.Generic;
               visited.Add(nextNode);
               for(int node = 0; node < nRow; node++) {
                 if (!visited.Contains(node)) {
-                  djikstra[node] = Math.Min(djikstra[node], djikstra[nextNode] + connectionTimeMatrix[nextNode, node]);
+                  //djikstra[node] = Math.Min(djikstra[node], djikstra[nextNode] + connectionTimeMatrix[nextNode, node]);
+                  int y = djikstra[nextNode] + connectionTimeMatrix[nextNode, node];
+                  if(y < djikstra[node]) {
+                    djikstra[node] = y;
+                  }
                 }
               }
             }
