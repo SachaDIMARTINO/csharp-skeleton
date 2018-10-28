@@ -45,6 +45,17 @@ using System.Collections.Generic;
                 }
               }
             }
+            Console.WriteLine("------");
+            Console.WriteLine(numOfServers);
+            Console.WriteLine(targetServer);
+            for (int i = 0; i < nRow; i++) {
+              Console.WriteLine("===");
+              for (int j = 0; j < nRow; j++) {
+                Console.WriteLine(connectionTimeMatrix[i, j]);
+              }
+            }
+            Console.WriteLine("======");
+            Console.WriteLine(djikstra[targetServer]);
             return djikstra[targetServer];
         }
 
