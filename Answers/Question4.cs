@@ -5,6 +5,14 @@ using System.Collections.Generic;
 {
     public class Question4
     {
+        public static int Parse(string str) {
+            int y = 0;
+            int n = str.Length;
+            for (int i = 0 ; i < n; i++) {
+                y = y * 10 + (str[i] - '0');
+            }
+            return y;
+        }
         public static int Answer(string[,] machineToBeFixed, int numOfConsecutiveMachines)
         {
             //TODO: Please work out the solution;
@@ -28,11 +36,11 @@ using System.Collections.Generic;
                   }
                 }
                 else {
-                  int elt = int.Parse(machineToBeFixed[i,j]);
+                  int elt = Question4.Parse(machineToBeFixed[i,j]);
                   counter++;
                   sumTmp += elt;
                   if (counter == numOfConsecutiveMachines + 1) {
-                    sumTmp -= int.Parse(machineToBeFixed[i, j - numOfConsecutiveMachines]);
+                    sumTmp -= Question4.Parse(machineToBeFixed[i, j - numOfConsecutiveMachines]);
                     counter -= 1;
                   }
                   if (counter == numOfConsecutiveMachines) {
