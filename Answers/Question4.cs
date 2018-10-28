@@ -36,7 +36,6 @@ using System.Collections.Generic;
                     counter -= 1;
                   }
                   if (counter == numOfConsecutiveMachines) {
-                    Console.WriteLine(sumTmp);
                     if (sumTmp < answer) {
                       answer = sumTmp;
                     }
