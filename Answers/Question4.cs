@@ -17,27 +17,34 @@ using System.Collections.Generic;
             }
 
             for(int i = 0; i < nRows; i++) {
-              for(int start = 0; start <= lenRow - numOfConsecutiveMachines; start++) {
-                List<string> shortRow = new List<string>();
-                for(int j = start; j < start + numOfConsecutiveMachines; j++) {
-                  shortRow.Add(machineToBeFixed[i, j]);
-                }
-                if (!shortRow.Contains("X")) {
-                  List<int> rowInt = new List<int>();
-                  foreach(string elt in shortRow) {
-                    rowInt.Add(int.Parse(elt));
+              int counter = 0;
+              int sumTmp = 0;
+              for(int j = 0; j <= lenRow - numOfConsecutiveMachines; j++) {
+                if (machineToBeFixed[i,j] == "X") {
+                  counter = 0;
+                  sumTmp = 0;
+                  if (numOfConsecutiveMachines >= lenRow - j) {
+                    break;
                   }
-                  answer = Math.Min(answer, rowInt.Sum());
+                }
+                else {
+                  int elt = int.Parse(machineToBeFixed[i,j]);
+                  counter++;
+                  sumTmp += elt;
+                  if (counter == numOfConsecutiveMachines + 1) {
+                    sumTmp -= int.Parse(machineToBeFixed[i, j - numOfConsecutiveMachines]);
+                    counter -= 1;
+                  }
+                  if (counter == numOfConsecutiveMachines) {
+                    if (sumTmp < answer) {
+                      answer = sumTmp;
+                    }
+                  }
                 }
               }
             }
 
-            if (answer == 1000000) {
-              return 0;
-            }
-            else {
-              return answer;
-            }
+            return (answer == 1000000) ? 0 : answer;
         }
     }
 }
