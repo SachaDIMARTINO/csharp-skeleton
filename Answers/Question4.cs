@@ -8,25 +8,22 @@ using System.Collections.Generic;
         public static int Answer(string[,] machineToBeFixed, int numOfConsecutiveMachines)
         {
             //TODO: Please work out the solution;
-            string[][] newMachineToBeFixed = new string[machineToBeFixed.GetLength(0)][];
-            for(int i = 0; i < machineToBeFixed.GetLength(0); i++) {
-              string[] newLine = new string[machineToBeFixed.GetLength(1)];
-              for(int j = 0; j < machineToBeFixed.GetLength(1); j++) {
-                newLine[j] = machineToBeFixed[i,j];
-              }
-              newMachineToBeFixed[i] = newLine;
-            }
+            int nRows = machineToBeFixed.GetLength(0);
+            int lenRow = machineToBeFixed.GetLength(1);
+
             int answer = 1000000;
-            if (machineToBeFixed.GetLength(0) == 0 || numOfConsecutiveMachines <= 0 || numOfConsecutiveMachines > 100) {
+            if (nRows == 0 || lenRow == 0 || numOfConsecutiveMachines <= 0 || nRows > 100 || numOfConsecutiveMachines > lenRow || numOfConsecutiveMachines > 100) {
               return 0;
             }
-            foreach(string[] row in newMachineToBeFixed) {
-              for(int start = 0; start < row.Count() - numOfConsecutiveMachines; start++) {
-                string[] shortRow = new string[numOfConsecutiveMachines];
-                Array.Copy(row, start, shortRow, 0, numOfConsecutiveMachines);
-                //rowInt = row.GetRange(start, numOfConsecutiveMachines);
-                List<int> rowInt = new List<int>();
+
+            for(int i = 0; i < nRows; i++) {
+              for(int start = 0; start <= lenRow - numOfConsecutiveMachines; start++) {
+                List<string> shortRow = new List<string>();
+                for(int j = start; j < start + numOfConsecutiveMachines; j++) {
+                  shortRow.Add(machineToBeFixed[i, j]);
+                }
                 if (!shortRow.Contains("X")) {
+                  List<int> rowInt = new List<int>();
                   foreach(string elt in shortRow) {
                     rowInt.Add(int.Parse(elt));
                   }
@@ -34,6 +31,7 @@ using System.Collections.Generic;
                 }
               }
             }
+
             if (answer == 1000000) {
               return 0;
             }
