@@ -13,7 +13,7 @@ using System.Collections.Generic;
             if(numOfServers == 0 || numOfServers > nRow) {
               return 0;
             }
-            int infinity = 10000000;
+            int infinity = int.MaxValue - 1;
             List<int> djikstra = new List<int>();
             for(int i = 0; i < nRow; i++) {
               djikstra.Add(infinity);
