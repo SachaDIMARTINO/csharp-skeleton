@@ -6,6 +6,18 @@ using System.Collections.Generic;
 {
     public class Question6
     {
+
+        public static int findNextNode(List<int> djikstra, List<int> visited, int infinity) {
+          int nextNode = djikstra.IndexOf(djikstra.Min());
+          if (!visited.Contains(nextNode)) {
+            return nextNode;
+          }
+          else {
+            djikstra[nextNode] = infinity;
+            return findNextNode(djikstra, visited, infinity);
+          }
+        }
+
         public static int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
             //TODO: Please work out the solution;
@@ -33,7 +45,7 @@ using System.Collections.Generic;
             }
             List<int> newDjikstra = djikstra.GetRange(0, djikstra.Count);
             while (visited.Count < numOfServers) {
-              int nextNode = findNextNode(newDjikstra, visited, infinity); //TODO
+              int nextNode = Question6.findNextNode(newDjikstra, visited, infinity);
               visited.Add(nextNode);
               for(int node = 0; node < nRow; node++) {
                 if (!visited.Contains(node)) {
@@ -46,17 +58,6 @@ using System.Collections.Generic;
               }
             }
             return djikstra[targetServer];
-        }
-
-        public static int findNextNode(List<int> djikstra, List<int> visited, int infinity) {
-          int nextNode = djikstra.IndexOf(djikstra.Min());
-          if (!visited.Contains(nextNode)) {
-            return nextNode;
-          }
-          else {
-            djikstra[nextNode] = infinity;
-            return findNextNode(djikstra, visited, infinity);
-          }
         }
     }
 }
