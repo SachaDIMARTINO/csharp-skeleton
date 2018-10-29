@@ -26,15 +26,12 @@ using System.Collections.Generic;
                 j++;
               }
               if (remaining == 0) {
-                answer = Math.Min(answer, res);
+                if (res < answer) {
+                  answer = res;
+                }
               }
             }
-            if (answer == totalValueOfShares + 1) {
-              return 0;
-            }
-            else {
-              return answer;
-            }
+            return (answer == totalValueOfShares + 1) ? 0 : answer;
         }
     }
 }
