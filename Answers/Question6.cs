@@ -43,8 +43,9 @@ using System.Collections.Generic;
                 }
               }
             }
-            List<int> newDjikstra = djikstra.GetRange(0, djikstra.Count);
+            //List<int> newDjikstra = djikstra.GetRange(0, djikstra.Count);
             while (visited.Count < numOfServers) {
+              List<int> newDjikstra = djikstra.GetRange(0, djikstra.Count);
               int nextNode = Question6.findNextNode(newDjikstra, visited, infinity);
               visited.Add(nextNode);
               for(int node = 0; node < nRow; node++) {
