@@ -1,64 +1,60 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text;
+using System.Diagnostics;
 ﻿namespace C_Sharp_Challenge_Skeleton.Answers
 
 {
     public class Question6
     {
 
-        public static int findNextNode(List<int> djikstra, int length, List<int> visited, int infinity) {
-          int nextNode = -1;
-          int tmp = infinity;
-          for(int i = 0; i < length; i++) {
-            if(djikstra[i] < tmp && !visited.Contains(i)) {
-              tmp = djikstra[i];
-              nextNode = i;
+        private static int MinimumDistance(int[] distance, bool[] shortestPathTreeSet, int verticesCount)
+        {
+            int min = int.MaxValue;
+            int minIndex = 0;
+
+            for (int v = 0; v < verticesCount; ++v)
+            {
+                if (shortestPathTreeSet[v] == false && distance[v] <= min)
+                {
+                    min = distance[v];
+                    minIndex = v;
+                }
             }
-          }
-          return nextNode;
+
+            return minIndex;
+        }
+
+        public static int DijkstraAlgo(int[,] graph, int source, int verticesCount, int targetServer)
+        {
+            int[] distance = new int[verticesCount];
+            bool[] shortestPathTreeSet = new bool[verticesCount];
+
+            for (int i = 0; i < verticesCount; ++i)
+            {
+                distance[i] = int.MaxValue;
+                shortestPathTreeSet[i] = false;
+            }
+
+            distance[source] = 0;
+
+            for (int count = 0; count < verticesCount - 1; ++count)
+            {
+                int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
+                shortestPathTreeSet[u] = true;
+
+                for (int v = 0; v < verticesCount; ++v)
+                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
+                        distance[v] = distance[u] + graph[u, v];
+            }
+            return distance[targetServer];
         }
 
         public static int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
             //TODO: Please work out the solution;
-            int nRow = connectionTimeMatrix.GetLength(0);
-            /*if(numOfServers == 0 || numOfServers > nRow || targetServer == 0) {
-              return 0;
-            }*/
-            int infinity = int.MaxValue - 1;
-            List<int> djikstra = new List<int>();
-            for(int i = 0; i < nRow; i++) {
-              djikstra.Add(infinity);
-            }
-            // Lets visit the first node
-            djikstra[0] = connectionTimeMatrix[0, 0];
-            List<int> visited = new List<int>();
-            visited.Add(0);
-            for(int node = 0; node < nRow; node++) {
-              if (!visited.Contains(node)) {
-                //djikstra[node] = Math.Min(djikstra[node], djikstra[0] + connectionTimeMatrix[0, node]);
-                int x = djikstra[0] + connectionTimeMatrix[0, node];
-                if(x < djikstra[node]) {
-                  djikstra[node] = x;
-                }
-              }
-            }
-            while (visited.Count < numOfServers) {
-              //List<int> newDjikstra = djikstra.ToList();
-              int nextNode = Question6.findNextNode(djikstra, nRow, visited, infinity);
-              visited.Add(nextNode);
-              for(int node = 0; node < nRow; node++) {
-                if (!visited.Contains(node)) {
-                  //djikstra[node] = Math.Min(djikstra[node], djikstra[nextNode] + connectionTimeMatrix[nextNode, node]);
-                  int y = djikstra[nextNode] + connectionTimeMatrix[nextNode, node];
-                  if(y < djikstra[node]) {
-                    djikstra[node] = y;
-                  }
-                }
-              }
-            }
-            return djikstra[targetServer];
+            return DijkstraAlgo(connectionTimeMatrix, 0, numOfServers, targetServer);
         }
     }
 }
