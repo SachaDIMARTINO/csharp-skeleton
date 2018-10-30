@@ -7,11 +7,11 @@ using System.Collections.Generic;
     public class Question6
     {
 
-        public static int findNextNode(List<int> djikstra, int length, List<int> visited, int infinity) {
+        public static int findNextNode(int[] djikstra, int length, int[] visited, int infinity) {
           int nextNode = -1;
           int tmp = infinity;
           for(int i = 0; i < length; i++) {
-            if(djikstra[i] < tmp && !visited.Contains(i)) {
+            if(djikstra[i] < tmp && (Array.IndexOf(visited, i) == -1)) {
               tmp = djikstra[i];
               nextNode = i;
             }
@@ -27,16 +27,19 @@ using System.Collections.Generic;
               return 0;
             }
             int infinity = int.MaxValue - 1;
-            List<int> djikstra = new List<int>();
+            int[] djikstra = new int[nRow];
+            int[] visited = new int[nRow];
+            int nbVisitedNodes = 0;
             for(int i = 0; i < nRow; i++) {
-              djikstra.Add(infinity);
+              djikstra[i] = infinity;
+              visited[i] = -1;
             }
             // Lets visit the first node
             djikstra[0] = connectionTimeMatrix[0, 0];
-            List<int> visited = new List<int>();
-            visited.Add(0);
+            visited[0] = 0;
+            nbVisitedNodes++;
             for(int node = 0; node < nRow; node++) {
-              if (!visited.Contains(node)) {
+              if (Array.IndexOf(visited, node) == -1) {
                 //djikstra[node] = Math.Min(djikstra[node], djikstra[0] + connectionTimeMatrix[0, node]);
                 int x = djikstra[0] + connectionTimeMatrix[0, node];
                 if(x < djikstra[node]) {
@@ -44,12 +47,13 @@ using System.Collections.Generic;
                 }
               }
             }
-            while (visited.Count < numOfServers) {
+            while (Array.IndexOf(visited, -1) != -1) {
               //List<int> newDjikstra = djikstra.ToList();
               int nextNode = Question6.findNextNode(djikstra, nRow, visited, infinity);
-              visited.Add(nextNode);
+              visited[nbVisitedNodes] = nextNode;
+              nbVisitedNodes++;
               for(int node = 0; node < nRow; node++) {
-                if (!visited.Contains(node)) {
+                if (Array.IndexOf(visited, node) == -1) {
                   //djikstra[node] = Math.Min(djikstra[node], djikstra[nextNode] + connectionTimeMatrix[nextNode, node]);
                   int y = djikstra[nextNode] + connectionTimeMatrix[nextNode, node];
                   if(y < djikstra[node]) {
