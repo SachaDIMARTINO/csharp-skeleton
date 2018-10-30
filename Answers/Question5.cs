@@ -23,7 +23,7 @@ using System.Collections.Generic;
                 int n = remaining / setArr[j];
                 res = res + n;
                 remaining = remaining - n * setArr[j];
-                j++;
+                j += 1;
               }
               if (remaining == 0) {
                 if (res < answer) {

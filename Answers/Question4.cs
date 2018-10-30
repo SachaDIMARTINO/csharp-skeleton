@@ -20,7 +20,7 @@ using System.Collections.Generic;
             int lenRow = machineToBeFixed.GetLength(1);
 
             int answer = 1000000;
-            if (nRows == 0 || lenRow == 0 || numOfConsecutiveMachines <= 0 || nRows > 100 || numOfConsecutiveMachines > lenRow || numOfConsecutiveMachines > 100) {
+            if (numOfConsecutiveMachines > lenRow) {
               return 0;
             }
 
@@ -37,7 +37,7 @@ using System.Collections.Generic;
                 }
                 else {
                   int elt = Question4.Parse(machineToBeFixed[i,j]);
-                  counter++;
+                  counter += 1;
                   sumTmp += elt;
                   if (counter == numOfConsecutiveMachines + 1) {
                     sumTmp -= Question4.Parse(machineToBeFixed[i, j - numOfConsecutiveMachines]);

@@ -23,9 +23,9 @@ using System.Collections.Generic;
         {
             //TODO: Please work out the solution;
             int nRow = connectionTimeMatrix.GetLength(0);
-            if(numOfServers == 0 || numOfServers > nRow || targetServer == 0) {
+            /*if(numOfServers == 0 || numOfServers > nRow || targetServer == 0) {
               return 0;
-            }
+            }*/
             int infinity = int.MaxValue - 1;
             List<int> djikstra = new List<int>();
             for(int i = 0; i < nRow; i++) {
