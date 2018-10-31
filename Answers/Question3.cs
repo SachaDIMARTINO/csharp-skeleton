@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace C_Sharp_Challenge_Skeleton.Answers
 {
 
-    public class Graph2 {
+    public class GraphArr {
         public int nbNodes {
             get;
             set;
@@ -13,7 +13,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
         public int[] edges {
             get;
         }
-        public Graph2(int nbNodes, int[] edges) {
+        public GraphArr(int nbNodes, int[] edges) {
             this.nbNodes = nbNodes;
             this.edges = edges;
         }
@@ -24,11 +24,11 @@ namespace C_Sharp_Challenge_Skeleton.Answers
     }
 
     class Solution {
-        Graph2 graph;
+        GraphArr graph;
         int k;
         int sizeTmp;
         int size;
-        public Solution(Graph2 g) {
+        public Solution(GraphArr g) {
             this.graph = g;
             this.k = 0;
         }
@@ -119,7 +119,7 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                 edges[a * numOfNodes + b] = 1;
                 edges[b * numOfNodes + a] = 1;
             }
-            Graph2 g = new Graph2(numOfNodes, edges);
+            GraphArr g = new GraphArr(numOfNodes, edges);
             Solution solution = new Solution(g);
             return solution.FindSolution();
         }
