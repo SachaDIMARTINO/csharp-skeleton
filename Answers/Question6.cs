@@ -54,6 +54,9 @@ using System.Diagnostics;
         public static int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
             //TODO: Please work out the solution;
+            if(targetServer == 0 || connectionTimeMatrix.GetLength(1) != numOfServers) {
+              return 0;
+            }
             return DijkstraAlgo(connectionTimeMatrix, numOfServers, targetServer);
         }
     }
