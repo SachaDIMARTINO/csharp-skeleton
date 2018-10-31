@@ -39,10 +39,15 @@ using System.Diagnostics;
 
             distance[0] = 0;
 
-            int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
-            shortestPathTreeSet[u] = true;
-            if (!shortestPathTreeSet[targetServer] && Convert.ToBoolean(graph[u, targetServer]) && distance[u] != int.MaxValue && distance[u] + graph[u, targetServer] < distance[targetServer])
-                distance[targetServer] = distance[u] + graph[u, targetServer];
+            for (int count = 0; count < verticesCount - 1; ++count)
+            {
+                int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
+                shortestPathTreeSet[u] = true;
+
+                for (int v = 0; v < verticesCount; ++v)
+                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
+                        distance[v] = distance[u] + graph[u, v];
+            }
             return distance[targetServer];
         }
 
