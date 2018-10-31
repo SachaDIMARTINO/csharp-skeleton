@@ -51,8 +51,10 @@ using System.Collections.Generic;
                 }
               }
             }
-
-            return (answer == 1000000) ? 0 : answer;
+            if(answer == 1000000) {
+              return 0;
+            }
+            return answer;
         }
     }
 }

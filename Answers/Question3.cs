@@ -98,7 +98,9 @@ namespace C_Sharp_Challenge_Skeleton.Answers
                             }
                         }
                     }
-                    a = (a < this.k-b) ? this.k-b : a;
+                    if (a < this.k-b) {
+                      a = this.k-b;
+                    }
                 }
                 return a;
             }

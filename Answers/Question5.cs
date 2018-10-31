@@ -31,7 +31,10 @@ using System.Collections.Generic;
                 }
               }
             }
-            return (resArr[totalValueOfShares] != infinity) ? resArr[totalValueOfShares] : 0;
+            if (resArr[totalValueOfShares] == infinity) {
+              return 0;
+            }
+            return resArr[totalValueOfShares];
         }
     }
 }
