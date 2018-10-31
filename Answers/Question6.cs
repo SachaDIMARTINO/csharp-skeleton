@@ -26,7 +26,7 @@ using System.Diagnostics;
             return minIndex;
         }
 
-        public static int DijkstraAlgo(int[,] graph, int source, int verticesCount, int targetServer)
+        public static int DijkstraAlgo(int[,] graph, int verticesCount, int targetServer)
         {
             int[] distance = new int[verticesCount];
             bool[] shortestPathTreeSet = new bool[verticesCount];
@@ -37,24 +37,19 @@ using System.Diagnostics;
                 shortestPathTreeSet[i] = false;
             }
 
-            distance[source] = 0;
+            distance[0] = 0;
 
-            for (int count = 0; count < verticesCount - 1; ++count)
-            {
-                int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
-                shortestPathTreeSet[u] = true;
-
-                for (int v = 0; v < verticesCount; ++v)
-                    if (!shortestPathTreeSet[v] && Convert.ToBoolean(graph[u, v]) && distance[u] != int.MaxValue && distance[u] + graph[u, v] < distance[v])
-                        distance[v] = distance[u] + graph[u, v];
-            }
+            int u = MinimumDistance(distance, shortestPathTreeSet, verticesCount);
+            shortestPathTreeSet[u] = true;
+            if (!shortestPathTreeSet[targetServer] && Convert.ToBoolean(graph[u, targetServer]) && distance[u] != int.MaxValue && distance[u] + graph[u, targetServer] < distance[targetServer])
+                distance[targetServer] = distance[u] + graph[u, targetServer];
             return distance[targetServer];
         }
 
         public static int Answer(int numOfServers, int targetServer, int[,] connectionTimeMatrix)
         {
             //TODO: Please work out the solution;
-            return DijkstraAlgo(connectionTimeMatrix, 0, numOfServers, targetServer);
+            return DijkstraAlgo(connectionTimeMatrix, numOfServers, targetServer);
         }
     }
 }
