@@ -8,7 +8,7 @@ using System.Collections.Generic;
         public static int Answer(int[] numOfShares, int totalValueOfShares)
         {
             //TODO: Please work out the solution;
-            if (numOfShares.Length == 0) {
+            if (totalValueOfShares < 1 || numOfShares == null || numOfShares.Length == 0) {
               return 0;
             }
             int[] setArr = numOfShares.Distinct().ToArray();
